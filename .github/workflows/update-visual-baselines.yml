@@ -1,0 +1,33 @@
+name: Update Visual Baselines
+
+on:
+  workflow_dispatch: # manual trigger only — run this from the Actions tab when needed
+
+jobs:
+  update-baselines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Regenerate visual baselines
+        run: npx playwright test visual.spec.ts --project=chromium --update-snapshots
+
+      - name: Commit updated baselines
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tests/visual.spec.ts-snapshots/
+          git diff --staged --quiet || git commit -m "chore: update visual regression baselines (Linux/CI)"
+          git push
