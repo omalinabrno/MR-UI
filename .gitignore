@@ -1,0 +1,11 @@
+# .gitignore
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# OS/editor cruft
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
