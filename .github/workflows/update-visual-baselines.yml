@@ -1,7 +1,10 @@
 name: Update Visual Baselines
 
 on:
-  workflow_dispatch: # manual trigger only — run this from the Actions tab when needed
+  workflow_dispatch:
+
+permissions:
+  contents: write   # ← add this, allows the workflow to push commits
 
 jobs:
   update-baselines:
