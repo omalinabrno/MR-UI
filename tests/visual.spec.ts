@@ -12,7 +12,8 @@ for (const res of resolutions) {
   test.describe(`Visual testing — ${res.name} (${res.width}x${res.height})`, () => {
     test.use({ viewport: { width: res.width, height: res.height } });
 
-    test(`header/nav matches baseline on ${res.name}`, async ({ page }) => {
+    test(`header/nav matches baseline on ${res.name}`, async ({ page, browserName }) => {
+       test.skip(browserName !== 'chromium', 'Visual regression baselines maintained for Chromium only');
       const moroPage = new MoroPage(page);
       await page.goto('https://www.morosystems.cz/', { waitUntil: 'networkidle' });
       await moroPage.acceptCookiesIfPresent();

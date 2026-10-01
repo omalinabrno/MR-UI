@@ -32,6 +32,6 @@ for (const res of resolutions) {
   await moroPage.acceptCookiesIfPresent();
 
   // Screenshot just the nav/header — structurally static, unlike job listings or blog teasers
-  await expect(page.locator('#menu-main-new')).toHaveScreenshot(`header-${res.name}.png`);
+  await expect(page.locator('#menu-main')).toHaveScreenshot(`header-${res.name}.png`);
 });
 }
