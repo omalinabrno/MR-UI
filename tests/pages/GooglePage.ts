@@ -56,9 +56,9 @@ private async waitForUrlToStabilize() {
 }
 
   async validateResultsContainLink(domainPart: string) {
-    const link = this.page.locator(`a[href*="${domainPart}"]`).first();
-    await expect(link).toBeVisible();
-  }
+  const anyLink = this.page.locator(`a[href*="${domainPart}"]`).first();
+  await expect(anyLink).toBeVisible({ timeout: 10000 });
+}
 
   async clickResultLink(domainPart: string) {
   const exactPattern = new RegExp(`^https://(www\\.)?${domainPart.replace(/\./g, '\\.')}/?$`);
