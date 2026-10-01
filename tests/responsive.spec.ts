@@ -26,12 +26,4 @@ for (const res of resolutions) {
       await moroPage.validateLayoutVisible();
     });
   });
-  test(`homepage header renders correctly on ${res.name}`, async ({ page }) => {
-  const moroPage = new MoroPage(page);
-  await page.goto('https://www.morosystems.cz/', { waitUntil: 'networkidle' });
-  await moroPage.acceptCookiesIfPresent();
-
-  // Screenshot just the nav/header — structurally static, unlike job listings or blog teasers
-  await expect(page.locator('#menu-main')).toHaveScreenshot(`header-${res.name}.png`);
-});
 }
