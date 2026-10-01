@@ -100,7 +100,7 @@ async forceLoadAllImages() {
   await this.page.evaluate(async () => {
     const images = Array.from(document.querySelectorAll('img[loading="lazy"]'));
     images.forEach(img => img.setAttribute('loading', 'eager'));
-    // Scroll through the page to trigger any scroll-based lazy loaders
+ 
     await new Promise(resolve => {
       let totalHeight = 0;
       const distance = 300;

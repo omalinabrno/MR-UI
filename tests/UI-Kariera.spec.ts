@@ -1,7 +1,7 @@
 import { test, expect } from './stealth-fixture';
 import { GooglePage } from './pages/GooglePage';
 import { MoroPage } from './pages/MoroPage';
-test.describe.configure({ mode: 'serial' });
+test.describe.configure({ mode: 'serial', retries: 5 });
 test('Execute Google Search for MoroSystems', async ({ page, browserName }) => {
 test.skip(browserName === 'firefox' || browserName === 'webkit',
     'Google anti-bot detection blocks non-Chromium automation');

@@ -36,16 +36,12 @@ export class GooglePage {
 }
 
 private async waitForUrlToStabilize() {
-  // Known: Google's auto-refine navigation happens ~2s after initial load.
-  // Wait past that window unconditionally first.
   await this.page.waitForTimeout(3000);
-
-  // Now confirm the URL has actually settled (no further changes)
   let lastUrl = this.page.url();
   let stableCount = 0;
-  const requiredStableChecks = 3; // 1.5s of no change
+  const requiredStableChecks = 3; 
   const checkIntervalMs = 500;
-  const maxChecks = 10; // up to 5s more, in case refresh is delayed further
+  const maxChecks = 10; 
 
   for (let i = 0; i < maxChecks && stableCount < requiredStableChecks; i++) {
     await this.page.waitForTimeout(checkIntervalMs);
@@ -76,8 +72,6 @@ private async waitForUrlToStabilize() {
     await link.click();
     return;
   }
-
-  // Fallback: no bare-domain organic result found — try the sidebar "Website"/"Web" link
   await this.clickSidebarWebsiteLink(domainPart);
 }
 async clickSidebarWebsiteLink(domainPart: string) {
